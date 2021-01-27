@@ -1,4 +1,5 @@
 package com.bh.login.pojo;
+
 /**
  * 2021/1/18
  * 用户实体类（封装类,将当前注册的账号密码封装在此类中）
@@ -12,7 +13,7 @@ public class User {
         this.password = password;
     }
 
-    public User(){
+    public User() {
 
     }
 

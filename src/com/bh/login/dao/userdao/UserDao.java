@@ -9,16 +9,18 @@ import java.io.IOException;
  */
 public interface UserDao {
     /**
-     * 这是用户登录功能
+     * 这是用户接口
+     *
      * @param username 用户名
      * @param password 密码
-     * @return  返回登录是否成功
-     * */
-    public abstract boolean isLogin(String username, String password) throws IOException;
+     * @return 返回登录是否成功
+     */
+    public abstract boolean isLogin(String username, String password);
 
     /**
-     * 这是用户注册功能
+     * 这是注册接口
+     *
      * @param user 需注册的用户信息
      */
-    public abstract void regist(User user) throws IOException;
+    public abstract void regist(User user);
 }

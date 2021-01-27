@@ -1,4 +1,5 @@
 package com.bh.login.dao.userdaoimpl;
+
 import com.bh.login.dao.userdao.UserDao;
 import com.bh.login.pojo.User;
 
@@ -7,18 +8,21 @@ import java.io.*;
 /**
  * 这是用户操作的具体实现类(I/O)
  * 登录/注册
- * */
+ */
 public class UserDaoImpl implements UserDao {
-    public static File file =new File("a.txt");
+    //为了保证
+    public static File file = new File("a.txt");
+
     //静态代码块，随着类的加载而加载
-    static{
+    static {
         try {
             file.createNewFile();
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("创建文件失败");
         }
     }
+
     /**
      * 登录
      *
@@ -36,10 +40,9 @@ public class UserDaoImpl implements UserDao {
             br = new BufferedReader(new FileReader("a.txt"));
             //一行一行的读取文件中的内容：----》readLine()
             String line = null;
-
             while ((line = br.readLine()) != null) {
-                String[] solits = line.split("=");
-                if(solits[0].equals(username)&&solits[1].equals(password)){
+                String[] solits = line.split("\\$");
+                if (solits[0].equals(username) && solits[1].equals(password)) {
                     flag = true;
                     break;
                 }
@@ -48,8 +51,8 @@ public class UserDaoImpl implements UserDao {
             System.out.println("找不到该文件！！！");
         } catch (IOException e) {
             System.out.println("登录失败！！！");
-        }finally {
-            if(br !=null) {
+        } finally {
+            if (br != null) {
                 try {
                     //关闭流
                     br.close();
@@ -63,23 +66,24 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * 注册
+     *
      * @param user
      */
     @Override
     public void regist(User user) {
-            //创建字符缓冲输出流对象
+        //创建字符缓冲输出流对象
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new FileWriter(file,true));
-            bw.write(user.getUsername()+"="+user.getPassword());
+            bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write(user.getUsername() + "$" + user.getPassword());
             //写入一个行分隔符
             bw.newLine();
             //强制刷新
             bw.flush();
         } catch (IOException e) {
             System.out.println("用户注册失败！！！");
-        }finally {
-            if(bw !=null) {
+        } finally {
+            if (bw != null) {
                 try {
                     //关闭流
                     bw.close();
